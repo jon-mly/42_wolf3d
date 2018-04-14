@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_init.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/14 14:30:14 by jmlynarc          #+#    #+#             */
+/*   Updated: 2018/04/14 16:01:12 by jmlynarc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 static void			setup_environnement(t_env *env)
@@ -13,9 +25,13 @@ static void			setup_camera(t_env *env)
 {
 	t_camera	camera;
 
-	camera.pos_x = floor(3.5 * (double)TEXTURE_RES);
-	camera.pos_y = floor(3.5 * (double)TEXTURE_RES);
-	camera.angle = 3 * M_PI / 4;
+	camera.position.x = 3.5 * TEXTURE_RES;
+	camera.position.y = 3.5 * TEXTURE_RES;
+	camera.angle = M_PI / 2;
+	camera.direction.x = 0;
+	camera.direction.y = -1;
+	camera.projection.x = FOV;
+	camera.projection.y = 0;
 	camera.height = TEXTURE_RES / 2;
 	env->camera = camera;
 }

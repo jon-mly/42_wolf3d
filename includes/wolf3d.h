@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wolf3d.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/14 14:31:14 by jmlynarc          #+#    #+#             */
+/*   Updated: 2018/04/14 16:09:28 by jmlynarc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef WOLF3D_H
 # define WOLF3D_H
 
@@ -17,14 +29,14 @@
 ** ======= macros
 */
 
-# define WIN_WIDTH 600
-# define WIN_HEIGHT 400
-# define MID_WIDTH 300
-# define MID_HEIGHT 200
+# define WIN_WIDTH 1200
+# define WIN_HEIGHT 800
+# define MID_WIDTH 600
+# define MID_HEIGHT 400
 
 # define TEXTURE_RES 64
-# define EMPTY 0
-# define WALL 1
+//# define EMPTY 0
+//# define WALL 1
 
 # define KEY_ESC 53
 # define KEY_ARROW_UP 126
@@ -33,9 +45,9 @@
 # define KEY_ARROW_RIGHT 123
 
 # define WALL_HEIGHT 64
-# define SCREEN_DISTANCE 100 //floor((double)600 / tan(M_PI / 6))
+# define SCREEN_DISTANCE 250 //floor((double)600 / tan(M_PI / 6))
 # define CAMERA_HEIGHT 32
-# define FOV M_PI / 3
+# define FOV 0.66
 
 # define ROTATION_ANGLE M_PI / 12
 
@@ -50,6 +62,12 @@ typedef enum	e_cardinal
 	WEST,
 	SOUTH
 }				t_cardinal;
+
+typedef enum	e_surface
+{
+	EMPTY,
+	WALL
+}				t_surface;
 
 /*
 ** ====== structures
@@ -75,22 +93,33 @@ typedef struct	s_point
 	int			y;
 }				t_point;
 
+typedef struct	s_vector
+{
+	double		x;
+	double		y;
+}				t_vector;
+
 typedef struct	s_ray
 {
-	t_point		origin;
-	t_point		end;
-	t_point		grid_point;
-	double		angle;
-	int			x_step;
-	int			y_step;
+	t_vector	direction;
+	t_point		map_position;
+	t_vector	side_shift;
+	double		delta_x;
+	double		delta_y;
+	int			x_direction;
+	int			y_direction;
+	double		wall_distance;
+	t_surface	surface;
+	t_cardinal	side;
 }				t_ray;
 
 typedef struct	s_camera
 {
-	int		pos_x;
-	int		pos_y;
+	t_vector	position;
+	t_vector	direction;
+	t_vector	projection;
 	double		angle;
-	int		height;
+	int			height;
 }				t_camera;
 
 typedef struct	s_map
