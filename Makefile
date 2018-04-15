@@ -27,9 +27,11 @@ SRCS = $(SRCS_REP)main.c \
 		$(SRCS_REP)map_init.c \
 		$(SRCS_REP)tools.c \
 		$(SRCS_REP)pixel_drawing.c \
-		$(SRCS_REP)raycasting.c \
-		$(SRCS_REP)angle_tools.c \
-		$(SRCS_REP)texturing.c
+		$(SRCS_REP)texturing.c \
+		$(SRCS_REP)line_drawing.c \
+		$(SRCS_REP)textures_init.c \
+		$(SRCS_REP)deinit.c \
+		$(SRCS_REP)raycasting.c
 
 O_SRCS = $(SRCS:.c=.o)
 

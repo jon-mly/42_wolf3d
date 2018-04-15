@@ -19,6 +19,8 @@ static void			setup_environnement(t_env *env)
 		"Wolf 3D");
 	env->win_width = WIN_WIDTH;
 	env->win_height = WIN_HEIGHT;
+	if (env->mlx_ptr == NULL || env->win_ptr == NULL)
+		exit_error(env);
 }
 
 static void			setup_camera(t_env *env)
@@ -46,8 +48,10 @@ t_env				*init_environnement(void)
 	env->win_ptr = NULL;
 	env->img_ptr = NULL;
 	env->img_str = NULL;
+	env->textures = NULL;
 	setup_environnement(env);
 	setup_camera(env);
+	init_textures(env);
 	return (env);
 }
 

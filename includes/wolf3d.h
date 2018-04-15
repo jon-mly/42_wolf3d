@@ -35,6 +35,7 @@
 # define MID_HEIGHT 400
 
 # define TEXTURE_RES 64
+# define TEXTURES_COUNT 4
 //# define EMPTY 0
 //# define WALL 1
 
@@ -149,6 +150,18 @@ typedef struct	s_map
 	int			width;
 }				t_map;
 
+typedef struct	s_texture
+{
+	char		*file_path;
+	int			height;
+	int			width;
+	void		*img_ptr;
+	char		*img_str;
+	int			bpp;
+	int			line_size;
+	int			endian;
+}				t_texture;
+
 typedef struct	s_env
 {
 	void			*mlx_ptr;
@@ -160,8 +173,10 @@ typedef struct	s_env
 	int				img_height;
 	int				img_width;
 	int				line_size;
-	t_map			map;
+	t_map			*map;
 	t_camera		camera;
+	int				textures_count;
+	t_texture		*textures;
 }				t_env;
 
 /*
@@ -187,5 +202,7 @@ void			draw_floor(int x, int y, t_env *env);
 void			draw_wall(int x, int y, t_env *env, t_cardinal cardinal);
 void			draw_column(int index, t_env *env, int wall_height,
 	t_cardinal cardinal);
+void			deinit_env(t_env *env);
+void			init_textures(t_env *env);
 
 #endif

@@ -56,7 +56,7 @@ static t_ray		digital_differential_analysis(t_ray ray, t_env *env)
 			ray.map_position.y += (int)(ray.y_direction);
 			ray.side = VERTICAL;
 		}
-		if (env->map.map[ray.map_position.y][ray.map_position.x] != EMPTY)
+		if (env->map->map[ray.map_position.y][ray.map_position.x] != EMPTY)
 			ray.surface = WALL;
 	}
 	if (ray.side == VERTICAL)

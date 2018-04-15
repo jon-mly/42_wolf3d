@@ -23,7 +23,7 @@ static void		move_camera(t_env *env, t_cam_move side)
 		multiplier;
 	new_y_position = env->camera.position.y + 0.2 * env->camera.direction.y *
 		multiplier;
-	if (env->map.map[(int)new_y_position][(int)new_x_position] == WALL)
+	if (env->map->map[(int)new_y_position][(int)new_x_position] == WALL)
 		ft_putendl("Would collide with a wall");
 	else
 	{

@@ -42,7 +42,7 @@ int		main(int ac, char **av)
 	env = init_environnement();
 	if (!(map = read_map_from(av[1])))
 		exit_error(env);
-	env->map = *map;
+	env->map = map;
 	print_map(*map);
 	redraw_scene(env);
 	mlx_key_hook(env->win_ptr, deal_with_key, (void*)env);
