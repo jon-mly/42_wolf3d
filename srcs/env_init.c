@@ -25,8 +25,8 @@ static void			setup_camera(t_env *env)
 {
 	t_camera	camera;
 
-	camera.position.x = 3.5 * TEXTURE_RES;
-	camera.position.y = 3.5 * TEXTURE_RES;
+	camera.position.x = 3.5;
+	camera.position.y = 3.5;
 	camera.angle = M_PI / 2;
 	camera.direction.x = 0;
 	camera.direction.y = -1;

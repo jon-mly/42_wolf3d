@@ -14,11 +14,11 @@
 
 static void		print_debug(t_env *env)
 {
-	int cam_x = env->camera.pos_x;
-	int cam_y = env->camera.pos_y;
+	double cam_x = env->camera.position.x;
+	double cam_y = env->camera.position.y;
 
 	printf("-----\n");
-	printf("CAMERA - x : %d (%d), y : %d (%d)\n", cam_x, cam_x / TEXTURE_RES, cam_y, cam_y / TEXTURE_RES);
+	printf("CAMERA - x : %.3f (%d), y : %.3f (%d)\n", cam_x, (int)cam_x, cam_y, (int)cam_y);
 	printf("ANGLE : %.2f\n", env->camera.angle * 180.0 / M_PI);
 }
 

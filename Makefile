@@ -26,10 +26,10 @@ SRCS = $(SRCS_REP)main.c \
 		$(SRCS_REP)key_events.c \
 		$(SRCS_REP)map_init.c \
 		$(SRCS_REP)tools.c \
-		$(SRCS_REP)distances.c \
 		$(SRCS_REP)pixel_drawing.c \
 		$(SRCS_REP)raycasting.c \
-		$(SRCS_REP)angle_tools.c
+		$(SRCS_REP)angle_tools.c \
+		$(SRCS_REP)texturing.c
 
 O_SRCS = $(SRCS:.c=.o)
 

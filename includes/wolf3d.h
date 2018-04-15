@@ -63,11 +63,29 @@ typedef enum	e_cardinal
 	SOUTH
 }				t_cardinal;
 
+typedef enum	e_ray_side
+{
+	HORIZONTAL,
+	VERTICAL
+}				t_ray_side;
+
 typedef enum	e_surface
 {
 	EMPTY,
 	WALL
 }				t_surface;
+
+typedef enum	e_cam_rotation
+{
+	LEFT,
+	RIGHT
+}				t_cam_rotation;
+
+typedef enum	e_cam_move
+{
+	BACKWARD,
+	FORWARD
+}				t_cam_move;
 
 /*
 ** ====== structures
@@ -106,11 +124,13 @@ typedef struct	s_ray
 	t_vector	side_shift;
 	double		delta_x;
 	double		delta_y;
-	int			x_direction;
-	int			y_direction;
+	double		x_direction;
+	double		y_direction;
 	double		wall_distance;
+	int			wall_pixel_height;
 	t_surface	surface;
-	t_cardinal	side;
+	t_ray_side	side;
+	t_cardinal	cardinal;
 }				t_ray;
 
 typedef struct	s_camera
@@ -162,4 +182,10 @@ void			redraw_scene(t_env *env);
 int				deal_with_key(int key, void *param);
 t_cardinal		cardinal_for_wall(double horizontal_distance,
 	double vertical_distance, double angle);
+void			draw_ceiling(int x, int y, t_env *env);
+void			draw_floor(int x, int y, t_env *env);
+void			draw_wall(int x, int y, t_env *env, t_cardinal cardinal);
+void			draw_column(int index, t_env *env, int wall_height,
+	t_cardinal cardinal);
+
 #endif

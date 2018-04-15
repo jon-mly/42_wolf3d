@@ -52,23 +52,6 @@ static void		draw_wall(int x, int y, t_env *env, t_cardinal cardinal)
 	fill_pixel(env, x, y, color);
 }
 
-static void		draw_column(int index, t_env *env, int wall_height,
-	t_cardinal cardinal)
-{
-	int		line;
-
-	line = -1;
-	while (++line < WIN_HEIGHT)
-	{
-		if (line < -wall_height / 2 + MID_HEIGHT)
-			draw_ceiling(index, line, env);
-		else if (line > wall_height / 2 + MID_HEIGHT)
-			draw_floor(index, line, env);
-		else
-			draw_wall(index, line, env, cardinal);
-	}
-}
-
 /*
  * Cast a ray on the pixel column pointed by index.
  * Will also draw the line on the current image.
