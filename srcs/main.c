@@ -45,7 +45,11 @@ int		main(int ac, char **av)
 	env->map = map;
 	print_map(*map);
 	redraw_scene(env);
-	mlx_key_hook(env->win_ptr, deal_with_key, (void*)env);
+	ft_putendl("Scene is redrawn");
+//	mlx_key_hook(env->win_ptr, key_event, (void*)env);
+	mlx_hook(env->win_ptr, KEY_PRESS, KEY_PRESS_MASK, key_press, (void*)env);
+	mlx_hook(env->win_ptr, KEY_RELEASE, KEY_RELEASE_MASK, key_release, (void*)env);
+	mlx_loop_hook(env->mlx_ptr, no_event_loop, (void*)env);
 	mlx_loop(env->mlx_ptr);
 	return (0);
 }

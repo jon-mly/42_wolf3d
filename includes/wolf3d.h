@@ -52,7 +52,13 @@
 
 # define ROTATION_ANGLE M_PI / 12
 # define ROTATION_PER_SEC M_PI
-# define SPEED_PER_SEC 1.5
+# define SPEED_PER_SEC 3.5
+# define WALL_HIT_MARGIN 0.3
+
+# define KEY_PRESS 2
+# define KEY_PRESS_MASK (1L<<0)
+# define KEY_RELEASE 3
+# define KEY_RELEASE_MASK (1L<<1)
 
 /*
 ** ====== enumerations
@@ -138,11 +144,15 @@ typedef struct	s_ray
 
 typedef struct	s_camera
 {
-	t_vector	position;
-	t_vector	direction;
-	t_vector	projection;
-	double		angle;
-	int			height;
+	t_vector		position;
+	t_vector		direction;
+	t_vector		projection;
+	double			angle;
+	int				height;
+	int				move;
+	t_cam_move		move_side;
+	int				rotate;
+	t_cam_rotation	rotation_side;
 }				t_camera;
 
 typedef struct	s_map
@@ -168,6 +178,7 @@ typedef struct	s_timer
 {
 	clock_t		previous_time;
 	clock_t		current_time;
+	clock_t		next_frame;
 	double		frame_time;
 }				t_timer;
 
@@ -205,17 +216,18 @@ void			fill_pixel(t_env *env, int x, int y, t_color color);
 void			fill_pixel_value(t_env *env, int x, int y, int color_value);
 void			cast_ray(int index, t_env *env);
 void			redraw_scene(t_env *env);
-int				deal_with_key(int key, void *param);
 t_cardinal		cardinal_for_wall(double horizontal_distance,
 	double vertical_distance, double angle);
 void			draw_ceiling(int x, int y, t_env *env);
 void			draw_floor(int x, int y, t_env *env);
 void			draw_wall(int x, int y, t_env *env, t_cardinal cardinal);
-//void			draw_column(int index, t_env *env, int wall_height,
-//	t_cardinal cardinal);
 void			draw_column(int index, t_env *env, t_ray ray);
 void			deinit_env(t_env *env);
 void			init_textures(t_env *env);
 void			apply_texture_on_line(int line, t_env *env, t_ray ray);
+int				move_camera_if_needed(t_env *env);
+int				no_event_loop(void *param);
+int				key_press(int key, void *param);
+int				key_release(int key, void *param);
 
 #endif

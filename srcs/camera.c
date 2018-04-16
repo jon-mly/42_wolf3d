@@ -12,24 +12,39 @@
 
 #include "wolf3d.h"
 
+static int		hit_x_wall(t_camera camera, double new_x_position, int **map)
+{
+	new_x_position += WALL_HIT_MARGIN * camera.direction.x;
+	return (map[(int)(camera.position.y)][(int)new_x_position] == WALL);
+}
+
+static int		hit_y_wall(t_camera camera, double new_y_position, int **map)
+{
+	new_y_position += WALL_HIT_MARGIN * camera.direction.y;
+	return (map[(int)new_y_position][(int)(camera.position.x)] == WALL);
+}
+
 static void		move_camera(t_env *env, t_cam_move side)
 {
 	double	new_x_position;
 	double	new_y_position;
 	int		multiplier;
+	double	move;
 
+	move = SPEED_PER_SEC * (double)(env->timer.frame_time);
 	multiplier = (side == FORWARD) ? 1 : -1;
-	new_x_position = env->camera.position.x + 0.2 * env->camera.direction.x *
+	new_x_position = env->camera.position.x + move * env->camera.direction.x *
 		multiplier;
-	new_y_position = env->camera.position.y + 0.2 * env->camera.direction.y *
+	new_y_position = env->camera.position.y + move * env->camera.direction.y *
 		multiplier;
-	if (env->map->map[(int)new_y_position][(int)new_x_position] == WALL)
-		ft_putendl("Would collide with a wall");
+	if (hit_x_wall(env->camera, new_x_position, env->map->map))
+		ft_putendl("Would collide with a wall X-AXIS");
 	else
-	{
 		env->camera.position.x = new_x_position;
+	if (hit_y_wall(env->camera, new_y_position, env->map->map))
+		ft_putendl("Would collide with a wall Y_AXIS");
+	else
 		env->camera.position.y = new_y_position;
-	}
 }
 
 static void		rotate_camera(t_env *env, t_cam_rotation side)
@@ -42,7 +57,8 @@ static void		rotate_camera(t_env *env, t_cam_rotation side)
 
 	old_dir = env->camera.direction;
 	old_proj = env->camera.projection;
-	rotation = ROTATION_ANGLE * ((side == LEFT) ? 1 : -1);
+	rotation = ROTATION_PER_SEC * (double)(env->timer.frame_time)
+		* ((side == LEFT) ? 1 : -1);
 	env->camera.angle += rotation;
 	new_dir.x = old_dir.x * cos(rotation) - old_dir.y * sin(rotation);
 	new_dir.y = old_dir.x * sin(rotation) + old_dir.y * cos(rotation);
@@ -52,30 +68,17 @@ static void		rotate_camera(t_env *env, t_cam_rotation side)
 	env->camera.projection = new_proj;
 }
 
-static int		handle_key(int key, t_env *env)
+int				move_camera_if_needed(t_env *env)
 {
-	if (key == KEY_ARROW_RIGHT)
-		rotate_camera(env, RIGHT);
-	else if (key == KEY_ARROW_LEFT)
-		rotate_camera(env, LEFT);
-	else if (key == KEY_ARROW_UP)
-		move_camera(env, FORWARD);
-	else if (key == KEY_ARROW_DOWN)
-		move_camera(env, BACKWARD);
-	else
+	if (env->camera.move == 0 && env->camera.rotate == 0)
 		return (0);
-	redraw_scene(env);
+	if (env->camera.rotate == 1 && env->camera.rotation_side == RIGHT)
+		rotate_camera(env, RIGHT);
+	else if (env->camera.rotate == 1 && env->camera.rotation_side == LEFT)
+		rotate_camera(env, LEFT);
+	if (env->camera.move == 1 && env->camera.move_side == FORWARD)
+		move_camera(env, FORWARD);
+	else if (env->camera.move == 1 && env->camera.move_side == BACKWARD)
+		move_camera(env, BACKWARD);
 	return (1);
-}
-
-int				deal_with_key(int key, void *param)
-{
-	t_env	*env;
-
-	env = (t_env*)param;
-	if (key == KEY_ESC)
-		exit_normally(env);
-	else
-		handle_key(key, env);
-	return (0);
 }

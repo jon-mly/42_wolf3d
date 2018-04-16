@@ -21,8 +21,9 @@ static void			setup_environnement(t_env *env)
 	env->win_height = WIN_HEIGHT;
 	if (env->mlx_ptr == NULL || env->win_ptr == NULL)
 		exit_error(env);
-	env->timer.previous_time = 0;
+	env->timer.previous_time = clock();
 	env->timer.current_time = clock();
+	env->timer.next_frame = clock() + (CLOCKS_PER_SEC / 150);
 }
 
 static void			setup_camera(t_env *env)
@@ -37,6 +38,8 @@ static void			setup_camera(t_env *env)
 	camera.projection.x = FOV;
 	camera.projection.y = 0;
 	camera.height = TEXTURE_RES / 2;
+	camera.move = 0;
+	camera.rotate = 0;
 	env->camera = camera;
 }
 

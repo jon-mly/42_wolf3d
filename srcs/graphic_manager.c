@@ -22,14 +22,37 @@ static void		print_debug(t_env *env)
 	printf("ANGLE : %.2f\n", env->camera.angle * 180.0 / M_PI);
 }
 
-void	redraw_scene(t_env *env)
+static int		should_redraw(t_env *env)
+{
+	env->timer.previous_time = env->timer.current_time;
+	env->timer.current_time = clock();
+	if (env->timer.next_frame > env->timer.current_time)
+		return (0);
+	env->timer.frame_time = (double)(env->timer.current_time
+		- env->timer.previous_time) / (double)CLOCKS_PER_SEC;
+	env->timer.next_frame = env->timer.current_time + (CLOCKS_PER_SEC / 150);
+	return ((move_camera_if_needed(env)) || env->img_ptr == NULL);
+}
+
+void			redraw_scene(t_env *env)
 {
 	int		column;
 	int			bpp;
 	int			s_l;
 	int			endian;
 
-	print_debug(env);
+	if (!(should_redraw(env)))
+		return;
+	if (!(env->img_ptr))
+	{
+		if (!(env->img_ptr = mlx_new_image(env->mlx_ptr, env->win_width, env->win_height)))
+			return;
+		env->img_width = WIN_WIDTH;
+		env->img_height = WIN_HEIGHT;
+		env->img_str = (unsigned char *)(mlx_get_data_addr(env->img_ptr, &bpp, &s_l, &endian));
+		env->line_size = s_l / 4;
+	}
+/*
 	if (env->img_ptr)
 		mlx_destroy_image(env->mlx_ptr, env->img_ptr);
 	if (!(env->img_ptr = mlx_new_image(env->mlx_ptr, env->win_width, env->win_height)))
@@ -38,10 +61,9 @@ void	redraw_scene(t_env *env)
 	env->img_height = WIN_HEIGHT;
 	env->img_str = (unsigned char *)(mlx_get_data_addr(env->img_ptr, &bpp, &s_l, &endian));
 	env->line_size = s_l / 4;
+*/	
 	column = -1;
 	while (++column < WIN_WIDTH)
 		cast_ray(column, env);
 	mlx_put_image_to_window((void *)env, env->win_ptr, env->img_ptr, 0, 0);
-	env->timer.previous_time = env->timer.current_time;
-	env->timer.current_time = clock();
 }

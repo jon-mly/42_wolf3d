@@ -23,7 +23,7 @@ SRCS = $(SRCS_REP)main.c \
 		$(SRCS_REP)env_init.c \
 		$(SRCS_REP)exit.c \
 		$(SRCS_REP)graphic_manager.c \
-		$(SRCS_REP)key_events.c \
+		$(SRCS_REP)camera.c \
 		$(SRCS_REP)map_init.c \
 		$(SRCS_REP)tools.c \
 		$(SRCS_REP)pixel_drawing.c \
@@ -31,7 +31,8 @@ SRCS = $(SRCS_REP)main.c \
 		$(SRCS_REP)line_drawing.c \
 		$(SRCS_REP)textures_init.c \
 		$(SRCS_REP)deinit.c \
-		$(SRCS_REP)raycasting.c
+		$(SRCS_REP)raycasting.c \
+		$(SRCS_REP)loop.c
 
 O_SRCS = $(SRCS:.c=.o)
 
