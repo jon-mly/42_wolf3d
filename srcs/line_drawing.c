@@ -40,19 +40,19 @@ void		draw_wall(int x, int y, t_env *env, t_cardinal cardinal)
 	fill_pixel(env, x, y, color);
 }
 
-void		draw_column(int index, t_env *env, int wall_height,
-	t_cardinal cardinal)
+void		draw_column(int index, t_env *env, t_ray ray)
 {
 	int		line;
 
 	line = -1;
 	while (++line < WIN_HEIGHT)
 	{
-		if (line < -wall_height / 2 + MID_HEIGHT)
+		if (line < -ray.wall_pixel_height / 2 + MID_HEIGHT)
 			draw_ceiling(index, line, env);
-		else if (line > wall_height / 2 + MID_HEIGHT)
+		else if (line > ray.wall_pixel_height / 2 + MID_HEIGHT)
 			draw_floor(index, line, env);
-		else
-			draw_wall(index, line, env, cardinal);
+//		else
+//			draw_wall(index, line, env, cardinal);
 	}
+	apply_texture_on_line(index, env, ray);
 }

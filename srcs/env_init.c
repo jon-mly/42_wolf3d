@@ -21,6 +21,8 @@ static void			setup_environnement(t_env *env)
 	env->win_height = WIN_HEIGHT;
 	if (env->mlx_ptr == NULL || env->win_ptr == NULL)
 		exit_error(env);
+	env->timer.previous_time = 0;
+	env->timer.current_time = clock();
 }
 
 static void			setup_camera(t_env *env)

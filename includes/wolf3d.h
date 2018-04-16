@@ -24,6 +24,8 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <math.h>
+# include <time.h>
+# include <stdio.h>
 
 /*
 ** ======= macros
@@ -36,8 +38,6 @@
 
 # define TEXTURE_RES 64
 # define TEXTURES_COUNT 4
-//# define EMPTY 0
-//# define WALL 1
 
 # define KEY_ESC 53
 # define KEY_ARROW_UP 126
@@ -51,6 +51,8 @@
 # define FOV 0.66
 
 # define ROTATION_ANGLE M_PI / 12
+# define ROTATION_PER_SEC M_PI
+# define SPEED_PER_SEC 1.5
 
 /*
 ** ====== enumerations
@@ -162,6 +164,13 @@ typedef struct	s_texture
 	int			endian;
 }				t_texture;
 
+typedef struct	s_timer
+{
+	clock_t		previous_time;
+	clock_t		current_time;
+	double		frame_time;
+}				t_timer;
+
 typedef struct	s_env
 {
 	void			*mlx_ptr;
@@ -177,6 +186,7 @@ typedef struct	s_env
 	t_camera		camera;
 	int				textures_count;
 	t_texture		*textures;
+	t_timer			timer;
 }				t_env;
 
 /*
@@ -192,6 +202,7 @@ t_env			*init_environnement(void);
 double			min_horizontal_distance(t_env *env, double angle);
 double			min_vertical_distance(t_env *env, double angle);
 void			fill_pixel(t_env *env, int x, int y, t_color color);
+void			fill_pixel_value(t_env *env, int x, int y, int color_value);
 void			cast_ray(int index, t_env *env);
 void			redraw_scene(t_env *env);
 int				deal_with_key(int key, void *param);
@@ -200,9 +211,11 @@ t_cardinal		cardinal_for_wall(double horizontal_distance,
 void			draw_ceiling(int x, int y, t_env *env);
 void			draw_floor(int x, int y, t_env *env);
 void			draw_wall(int x, int y, t_env *env, t_cardinal cardinal);
-void			draw_column(int index, t_env *env, int wall_height,
-	t_cardinal cardinal);
+//void			draw_column(int index, t_env *env, int wall_height,
+//	t_cardinal cardinal);
+void			draw_column(int index, t_env *env, t_ray ray);
 void			deinit_env(t_env *env);
 void			init_textures(t_env *env);
+void			apply_texture_on_line(int line, t_env *env, t_ray ray);
 
 #endif

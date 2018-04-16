@@ -43,20 +43,22 @@ MLX_FLAGS = -I ~/Library -g -L ~/Library -lmlx -framework OpenGL -framework \
 MATH_FLAG = -lm
 
 %.o: %.c
-	@gcc -c $< -o $@
+	@gcc $(W_FLAGS) -c $< -o $@
 
 $(NAME):
-	cd $(LIBFT_REP) && make
+	make -C $(LIBFT_REP)
 	gcc $(INCLUDE_FLAG) $(MLX_FLAGS) $(MATH_FLAG) $(SRCS) $(LIBFT) -o $(NAME)
 
 all: $(NAME)
 
 clean:
-	cd $(LIBFT_REP) && make clean
+	make clean -C $(LIBFT_REP)
 	rm -rf $(O_SRCS)
 
 fclean: clean
-	cd $(LIBFT_REP) && make fclean
+	make fclean -C $(LIBFT_REP)
 	rm -rf $(NAME) $(ASSOCIATED_REP)
 
 re: fclean all
+
+.PHONY: clean fclean re all

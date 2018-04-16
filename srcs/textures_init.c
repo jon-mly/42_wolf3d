@@ -11,6 +11,8 @@ static t_texture	load_texture(char *path, t_env *env)
 		&(texture.width), &(texture.height));
 	texture.img_str = mlx_get_data_addr(texture.img_ptr, &(texture.bpp),
 		&(texture.line_size), &(texture.endian));
+	texture.line_size /= 4;
+	printf("ls = %d, bpp = %d\n", texture.line_size, texture.bpp);
 	return (texture);
 }
 

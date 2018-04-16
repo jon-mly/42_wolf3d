@@ -88,5 +88,5 @@ void				cast_ray(int column, t_env *env)
 	ray = init_ray(column, env);
 	ray = digital_differential_analysis(ray, env);
 	ray = calculate_wall_height(ray, env);
-	draw_column(column, env, ray.wall_pixel_height, ray.cardinal);
+	draw_column(column, env, ray);
 }

@@ -42,4 +42,6 @@ void	redraw_scene(t_env *env)
 	while (++column < WIN_WIDTH)
 		cast_ray(column, env);
 	mlx_put_image_to_window((void *)env, env->win_ptr, env->img_ptr, 0, 0);
+	env->timer.previous_time = env->timer.current_time;
+	env->timer.current_time = clock();
 }
