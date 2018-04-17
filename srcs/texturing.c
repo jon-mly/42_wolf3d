@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 15:04:09 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/14 15:04:43 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 17:05:45 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static t_texture	wall_texture_for(t_cardinal cardinal, t_env *env)
 		return (env->textures[3]);
 }
 
-static t_color		color_for_pixel(t_texture texture, int texture_x, int texture_y)
+static t_color		color_for_pixel(t_texture texture, int texture_x,
+		int texture_y)
 {
 	t_color		color;
 	int			index;
@@ -62,6 +63,7 @@ void				apply_texture_on_line(int line, t_env *env, t_ray ray)
 	{
 		texture_y = (((y * 256 - env->win_height * 128 + ray.wall_pixel_height
 		* 128) * texture.height) / ray.wall_pixel_height) / 256;
-		fill_pixel(env, line, y, color_for_pixel(texture, texture_line, texture_y));
+		fill_pixel(env, line, y, color_for_pixel(texture, texture_line,
+					texture_y));
 	}
 }

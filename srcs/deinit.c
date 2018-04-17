@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   deinit.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/17 16:58:06 by jmlynarc          #+#    #+#             */
+/*   Updated: 2018/04/17 17:05:07 by jmlynarc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 static void		deinit_map(t_map *map)
@@ -29,10 +41,7 @@ static void		deinit_textures(t_texture *textures, int count, t_env *env)
 			texture = textures[count];
 			printf("%p\n", texture.img_ptr);
 			ft_putendl("Is reached");
-		//	if (texture.img_ptr)
-		//		mlx_destroy_image(env->mlx_ptr, texture.img_ptr);
 			ft_putendl("texture image freed");
-		//	ft_memdel((void**)(&(texture.img_str)));
 			ft_putendl("texture image data freed");
 		}
 		ft_memdel((void**)(&textures));
@@ -52,7 +61,6 @@ void			deinit_env(t_env *env)
 	if (env->win_ptr && env->mlx_ptr)
 		mlx_destroy_window(env->mlx_ptr, env->win_ptr);
 	ft_putendl("win_ptr freed");
-//	ft_memdel((void**)(&(env->img_str)));
 	ft_putendl("img_str freed");
 	ft_memdel((void**)(&(env->mlx_ptr)));
 	ft_putendl("mlx_ptr freed");

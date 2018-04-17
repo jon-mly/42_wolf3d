@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/14 16:01:12 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 16:58:18 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,3 @@ t_env				*init_environnement(void)
 	init_textures(env);
 	return (env);
 }
-

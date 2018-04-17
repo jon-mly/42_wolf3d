@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:43 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/14 14:30:44 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 17:02:25 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static t_map	set_up_map(t_map map, t_line **nodes, int height)
 		pos_index = -1;
 		if (!(map.map[line_index] = get_array(node->line)))
 			return (map);
-			// FIXME: line above
 		while (node->line[++pos_index])
 			map.map[line_index][pos_index] = ft_atoi(node->line[pos_index]);
 		node = node->next;

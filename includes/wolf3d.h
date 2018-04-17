@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:31:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/14 16:09:28 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 16:57:56 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define KEY_ARROW_RIGHT 123
 
 # define WALL_HEIGHT 64
-# define SCREEN_DISTANCE 250 //floor((double)600 / tan(M_PI / 6))
+# define SCREEN_DISTANCE 250
 # define CAMERA_HEIGHT 32
 # define FOV 0.66
 

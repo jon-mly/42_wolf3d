@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   loop.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/17 16:58:33 by jmlynarc          #+#    #+#             */
+/*   Updated: 2018/04/17 16:58:46 by jmlynarc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 int			no_event_loop(void *param)
@@ -13,7 +25,6 @@ int			key_press(int key, void *param)
 {
 	t_env	*env;
 
-//	ft_putendl("Key press triggered");
 	env = (t_env*)param;
 	if (key == KEY_ARROW_UP || key == KEY_ARROW_DOWN)
 	{
@@ -37,7 +48,6 @@ int			key_release(int key, void *param)
 {
 	t_env	*env;
 
-//	ft_putendl("Key release triggered");
 	env = (t_env*)param;
 	if (key == KEY_ARROW_UP || key == KEY_ARROW_DOWN)
 		env->camera.move = 0;

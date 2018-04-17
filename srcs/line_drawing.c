@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   line_drawing.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/17 16:58:55 by jmlynarc          #+#    #+#             */
+/*   Updated: 2018/04/17 16:59:57 by jmlynarc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 void		draw_ceiling(int x, int y, t_env *env)
@@ -13,7 +25,7 @@ void		draw_ceiling(int x, int y, t_env *env)
 
 void		draw_floor(int x, int y, t_env *env)
 {
-t_color		color;
+	t_color		color;
 
 	color.r = 50;
 	color.g = 100;
@@ -51,8 +63,6 @@ void		draw_column(int index, t_env *env, t_ray ray)
 			draw_ceiling(index, line, env);
 		else if (line > ray.wall_pixel_height / 2 + MID_HEIGHT)
 			draw_floor(index, line, env);
-//		else
-//			draw_wall(index, line, env, cardinal);
 	}
 	apply_texture_on_line(index, env, ray);
 }
