@@ -12,15 +12,17 @@
 
 #include "wolf3d.h"
 
-static int		hit_x_wall(t_camera camera, double new_x_position, int **map)
+static int		hit_x_wall(t_camera camera, double new_x_position, int **map,
+	int multiplier)
 {
-	new_x_position += WALL_HIT_MARGIN * camera.direction.x;
+	new_x_position += WALL_HIT_MARGIN * camera.direction.x * multiplier;
 	return (map[(int)(camera.position.y)][(int)new_x_position] == WALL);
 }
 
-static int		hit_y_wall(t_camera camera, double new_y_position, int **map)
+static int		hit_y_wall(t_camera camera, double new_y_position, int **map,
+	int multiplier)
 {
-	new_y_position += WALL_HIT_MARGIN * camera.direction.y;
+	new_y_position += WALL_HIT_MARGIN * camera.direction.y * multiplier;
 	return (map[(int)new_y_position][(int)(camera.position.x)] == WALL);
 }
 
@@ -37,11 +39,11 @@ static void		move_camera(t_env *env, t_cam_move side)
 		multiplier;
 	new_y_position = env->camera.position.y + move * env->camera.direction.y *
 		multiplier;
-	if (hit_x_wall(env->camera, new_x_position, env->map->map))
+	if (hit_x_wall(env->camera, new_x_position, env->map->map, multiplier))
 		ft_putendl("Would collide with a wall X-AXIS");
 	else
 		env->camera.position.x = new_x_position;
-	if (hit_y_wall(env->camera, new_y_position, env->map->map))
+	if (hit_y_wall(env->camera, new_y_position, env->map->map, multiplier))
 		ft_putendl("Would collide with a wall Y_AXIS");
 	else
 		env->camera.position.y = new_y_position;
