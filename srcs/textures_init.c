@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:01:57 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 17:01:58 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 17:15:01 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static t_texture	load_texture(char *path, t_env *env)
 	texture.img_str = mlx_get_data_addr(texture.img_ptr, &(texture.bpp),
 		&(texture.line_size), &(texture.endian));
 	texture.line_size /= 4;
-	printf("ls = %d, bpp = %d\n", texture.line_size, texture.bpp);
 	return (texture);
 }
 

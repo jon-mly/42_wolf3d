@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 16:58:06 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 17:05:07 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 17:15:14 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void		deinit_textures(t_texture *textures, int count, t_env *env)
 		while (++counter < count)
 		{
 			texture = textures[count];
-			printf("%p\n", texture.img_ptr);
 			ft_putendl("Is reached");
 			ft_putendl("texture image freed");
 			ft_putendl("texture image data freed");

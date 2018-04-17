@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 16:58:55 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 16:59:57 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 17:17:44 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ void		draw_column(int index, t_env *env, t_ray ray)
 	int		line;
 
 	line = -1;
+	apply_texture_on_line(index, env, ray);
 	while (++line < WIN_HEIGHT)
 	{
 		if (line < -ray.wall_pixel_height / 2 + MID_HEIGHT)
 			draw_ceiling(index, line, env);
-		else if (line > ray.wall_pixel_height / 2 + MID_HEIGHT)
+		else if (line >= ray.wall_pixel_height / 2 + MID_HEIGHT)
 			draw_floor(index, line, env);
 	}
-	apply_texture_on_line(index, env, ray);
 }

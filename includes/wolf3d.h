@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:31:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 16:57:56 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/04/17 17:14:46 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <fcntl.h>
 # include <math.h>
 # include <time.h>
-# include <stdio.h>
 
 /*
 ** ======= macros
