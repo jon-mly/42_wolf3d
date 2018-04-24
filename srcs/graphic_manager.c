@@ -48,6 +48,6 @@ void			redraw_scene(t_env *env)
 		column = -1;
 		while (++column < WIN_WIDTH)
 			cast_ray(column, env);
-		mlx_put_image_to_window((void *)env, env->win_ptr, env->img_ptr, 0, 0);
+		mlx_put_image_to_window(env->mlx_ptr, env->win_ptr, env->img_ptr, 0, 0);
 	}
 }
