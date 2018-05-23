@@ -6,7 +6,7 @@
 #    By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/14 14:31:18 by jmlynarc          #+#    #+#              #
-#    Updated: 2018/04/14 14:31:19 by jmlynarc         ###   ########.fr        #
+#    Updated: 2018/05/23 11:41:26 by jmlynarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,22 +19,24 @@ LIBFT = $(LIBFT_REP)/libft.a
 INCLUDE_FLAG = -I includes/
 
 SRCS_REP = srcs/
-SRCS = $(SRCS_REP)main.c \
-		$(SRCS_REP)env_init.c \
-		$(SRCS_REP)exit.c \
-		$(SRCS_REP)graphic_manager.c \
-		$(SRCS_REP)camera.c \
-		$(SRCS_REP)map_init.c \
-		$(SRCS_REP)tools.c \
-		$(SRCS_REP)pixel_drawing.c \
-		$(SRCS_REP)texturing.c \
-		$(SRCS_REP)line_drawing.c \
-		$(SRCS_REP)textures_init.c \
-		$(SRCS_REP)deinit.c \
-		$(SRCS_REP)raycasting.c \
-		$(SRCS_REP)loop.c
+SRCS = main.c \
+		env_init.c \
+		exit.c \
+		graphic_manager.c \
+		camera.c \
+		map_init.c \
+		tools.c \
+		pixel_drawing.c \
+		texturing.c \
+		line_drawing.c \
+		textures_init.c \
+		deinit.c \
+		raycasting.c \
+		loop.c
 
-O_SRCS = $(SRCS:.c=.o)
+SRC = $(addprefix $(SRCS_REP), $(SRCS))
+
+O_SRCS = $(SRC:.c=.o)
 
 W_FLAGS = -Wall -Werror -Wextra
 
@@ -44,11 +46,11 @@ MLX_FLAGS = -I ~/Library -g -L ~/Library -lmlx -framework OpenGL -framework \
 MATH_FLAG = -lm
 
 %.o: %.c
-	@gcc $(W_FLAGS) -c $< -o $@
+	@gcc $(W_FLAGS) $(INCLUDE_FLAG) -c $< -o $@
 
-$(NAME):
+$(NAME): $(O_SRCS)
 	make -C $(LIBFT_REP)
-	gcc $(INCLUDE_FLAG) $(MLX_FLAGS) $(MATH_FLAG) $(SRCS) $(LIBFT) -o $(NAME)
+	gcc $(INCLUDE_FLAG) $(MLX_FLAGS) $(MATH_FLAG) $(SRC) $(LIBFT) -o $(NAME)
 
 all: $(NAME)
 

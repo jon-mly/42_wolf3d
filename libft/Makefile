@@ -65,9 +65,9 @@ FLAGS = -Wall -Werror -Wextra
 NAME = libft.a
 
 %.o: %.c
-	@gcc -c $< -o $@
+	@gcc $(FLAGS) -c $< -o $@
 
-$(NAME):
+$(NAME): $(O_FILES)
 	@gcc $(FLAGS) -c $(SRCS)
 	@ar rc $(NAME) $(O_FILES)
 	@ranlib $(NAME)

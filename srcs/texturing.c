@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 15:04:09 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 17:05:45 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/05/23 11:44:59 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static t_color		color_for_pixel(t_texture texture, int texture_x,
 	t_color		color;
 	int			index;
 
+	color = (t_color){0, 0, 0, 0};
 	if (texture_x < 0 || texture_x >= texture.width || texture_y < 0 ||
 		texture_y >= texture.height)
 		return (color);

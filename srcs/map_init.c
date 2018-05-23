@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:43 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 17:02:25 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/05/23 11:41:57 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static int		*get_array(char **line)
 static t_map	set_up_map(t_map map, t_line **nodes, int height)
 {
 	t_line		*node;
-	int			*tmp;
 	int			line_index;
 	int			pos_index;
 
