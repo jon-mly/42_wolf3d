@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:43 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/05/23 11:41:57 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/18 13:14:40 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ static t_line	**get_lines(int fd)
 		node->line = coordinates;
 		node->next = NULL;
 		append_node(nodes, node);
+		ft_strdel(tmp);
 	}
+	ft_strdel(tmp);
+	ft_memdel((void**)&tmp);
 	return (nodes);
 }
 
@@ -68,6 +71,7 @@ static int		*get_array(char **line)
 static t_map	set_up_map(t_map map, t_line **nodes, int height)
 {
 	t_line		*node;
+	t_line		*to_remove;
 	int			line_index;
 	int			pos_index;
 
@@ -80,11 +84,18 @@ static t_map	set_up_map(t_map map, t_line **nodes, int height)
 		if (!(map.map[line_index] = get_array(node->line)))
 			return (map);
 		while (node->line[++pos_index])
+		{
 			map.map[line_index][pos_index] = ft_atoi(node->line[pos_index]);
+			ft_strdel(&node->line[pos_index]);
+		}
+		ft_memdel((void**)&node->line);
+		to_remove = node;
 		node = node->next;
+		ft_memdel((void*)&to_remove);
 	}
 	map.width = pos_index;
 	map.height = height;
+	ft_memdel((void**)&nodes);
 	return (map);
 }
 

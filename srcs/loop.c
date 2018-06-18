@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 16:58:33 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 16:58:46 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/18 13:27:01 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ int			no_event_loop(void *param)
 
 	env = (t_env*)param;
 	redraw_scene(env);
+	return (0);
+}
+
+int			event_hook(void *param)
+{
+	t_env		*env;
+
+	env = (t_env*)param;
+	exit_normally(env);
 	return (0);
 }
 

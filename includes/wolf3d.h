@@ -6,12 +6,15 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:31:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 17:14:46 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/18 13:27:10 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF3D_H
 # define WOLF3D_H
+
+// !!!!
+# include <stdio.h>
 
 /*
 ** ======= includes
@@ -58,6 +61,8 @@
 # define KEY_PRESS_MASK (1L<<0)
 # define KEY_RELEASE 3
 # define KEY_RELEASE_MASK (1L<<1)
+# define WIN_CROSS 17
+# define NO_MASK 0
 
 /*
 ** ====== enumerations
@@ -228,5 +233,6 @@ int				move_camera_if_needed(t_env *env);
 int				no_event_loop(void *param);
 int				key_press(int key, void *param);
 int				key_release(int key, void *param);
+int				event_hook(void *param);
 
 #endif
