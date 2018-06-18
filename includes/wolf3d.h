@@ -6,15 +6,12 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:31:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/18 13:27:10 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/18 13:32:41 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF3D_H
 # define WOLF3D_H
-
-// !!!!
-# include <stdio.h>
 
 /*
 ** ======= includes
