@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 16:58:18 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/22 13:58:28 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ t_env				*init_environnement(void)
 	env->img_ptr = NULL;
 	env->img_str = NULL;
 	env->textures = NULL;
+	env->textures_count = 0;
+	env->map = NULL;
 	setup_environnement(env);
 	setup_camera(env);
 	init_textures(env);

@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:28 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/14 14:30:29 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/22 15:47:08 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		exit_usage(void)
 {
-	ft_putendl("wolf3d [map file path]");
+	ft_putendl("Usage : ./wolf3d [map file path]");
 	exit(0);
 }
 

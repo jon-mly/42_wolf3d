@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:31:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/18 13:32:41 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/22 16:12:54 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,7 @@ void			exit_error(t_env *env);
 void			exit_normally(t_env *env);
 t_map			*read_map_from(char *path);
 int				is_integer_convertible(char *str);
+int				coordinates_are_convertible(char **coordinates);
 t_env			*init_environnement(void);
 double			min_horizontal_distance(t_env *env, double angle);
 double			min_vertical_distance(t_env *env, double angle);

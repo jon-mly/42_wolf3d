@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:39 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/18 13:21:28 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/22 16:05:31 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ int				main(int ac, char **av)
 	if (ac != 2)
 		exit_usage();
 	env = init_environnement();
+	ft_putendl("Will read map");
 	if (!(map = read_map_from(av[1])))
 		exit_error(env);
+	ft_putendl("Went through");
 	env->map = map;
 	redraw_scene(env);
 	set_up_hooks(env);

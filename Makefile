@@ -6,7 +6,7 @@
 #    By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/14 14:31:18 by jmlynarc          #+#    #+#              #
-#    Updated: 2018/06/18 13:14:12 by jmlynarc         ###   ########.fr        #
+#    Updated: 2018/06/22 15:46:19 by jmlynarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ DEBUG_FLAG = -fsanitize=address
 
 $(NAME): $(O_SRCS)
 	make -C $(LIBFT_REP)
-	gcc $(INCLUDE_FLAG) $(MLX_FLAGS) $(MATH_FLAG) $(SRC) $(LIBFT) -o $(NAME)
+	gcc $(INCLUDE_FLAG) $(DEBUG_FLAG) $(MLX_FLAGS) $(MATH_FLAG) $(SRC) $(LIBFT) -o $(NAME)
 
 all: $(NAME)
 
