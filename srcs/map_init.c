@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:43 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/22 16:17:06 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/22 16:20:27 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static t_line	**get_lines(int fd)
 		return (NULL);
 	while ((get_next_line(fd, tmp)) > 0)
 	{
-		if (!(coordinates = ft_strsplit(*tmp, ' ')) || !(coordinates_are_convertible(coordinates)))
+		if (!(coordinates = ft_strsplit(*tmp, ' ')) ||
+				!(coordinates_are_convertible(coordinates)))
 			return (NULL);
-		// TODO: should check if coordinates are integer convertible
 		if (!(node = (t_line*)malloc(sizeof(t_line))))
 			return (NULL);
 		node->line = coordinates;
@@ -110,10 +110,8 @@ t_map			*read_map_from(char *path)
 		return (NULL);
 	if (!(map = (t_map*)malloc(sizeof(t_map))))
 		return (NULL);
-	ft_putendl("First tests are ok");
 	if (!(nodes = get_lines(fd)))
 		return (NULL);
-	ft_putendl("Nodes are returned");
 	close(fd);
 	node = *nodes;
 	height = 0;
