@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:32 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 17:05:56 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/28 16:00:17 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,20 @@ static int		should_redraw(t_env *env)
 		- env->timer.previous_time) / (double)CLOCKS_PER_SEC;
 	env->timer.next_frame = env->timer.current_time + (CLOCKS_PER_SEC / 150);
 	return ((move_camera_if_needed(env)) || env->img_ptr == NULL);
+}
+
+static void		check_camera_position(t_env *env)
+{
+	int			x_pos;
+	int			y_pos;
+
+	x_pos = (int)(env->camera.position.x);
+	y_pos = (int)(env->camera.position.y);
+	if (x_pos >= env->map->width || x_pos < 0 || y_pos >= env->map->height ||
+			y_pos < 0)
+		exit_error(env);
+	else if (env->map->map[y_pos][x_pos] == WALL)
+		exit_error(env);
 }
 
 void			redraw_scene(t_env *env)
@@ -45,6 +59,7 @@ void			redraw_scene(t_env *env)
 				env->line_size = s_l / 4;
 			}
 		}
+		check_camera_position(env);
 		column = -1;
 		while (++column < WIN_WIDTH)
 			cast_ray(column, env);

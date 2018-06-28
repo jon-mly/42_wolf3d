@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:35 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/14 14:30:36 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/28 16:04:44 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ static void		move_camera(t_env *env, t_cam_move side)
 	new_y_position = env->camera.position.y + move * env->camera.direction.y *
 		multiplier;
 	if (hit_x_wall(env->camera, new_x_position, env->map->map, multiplier))
-		ft_putendl("Would collide with a wall X-AXIS");
+		/*ft_putendl("Would collide with a wall X-AXIS")*/;
 	else
 		env->camera.position.x = new_x_position;
 	if (hit_y_wall(env->camera, new_y_position, env->map->map, multiplier))
-		ft_putendl("Would collide with a wall Y_AXIS");
+		/*ft_putendl("Would collide with a wall Y_AXIS")*/;
 	else
 		env->camera.position.y = new_y_position;
 }

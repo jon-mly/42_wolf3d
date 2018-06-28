@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/14 14:30:28 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/28 14:47:11 by jmlynarc         ###   ########.fr       */
+/*   Created: 2018/06/28 14:42:58 by jmlynarc          #+#    #+#             */
+/*   Updated: 2018/06/28 14:51:18 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void		exit_wrong_map(void)
+t_map		check_map(int index, int pos_index, t_map map)
 {
-	ft_putendl("Map invalid");
-	exit(0);
-}
-
-void		exit_usage(void)
-{
-	ft_putendl("Usage : ./wolf3d [map file path]");
-	exit(0);
-}
-
-void		exit_error(t_env *env)
-{
-	ft_putendl("An error has occured");
-	deinit_env(env);
-	exit(0);
-}
-
-void		exit_normally(t_env *env)
-{
-	deinit_env(env);
-	exit(0);
+	if (index == 0)
+		map.width = pos_index;
+	else if (pos_index != map.width)
+		exit_wrong_map();
+	return (map);
 }

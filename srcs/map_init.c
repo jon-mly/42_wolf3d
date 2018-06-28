@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:43 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/22 16:20:27 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/28 14:51:24 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ static t_map	set_up_map(t_map map, t_line **nodes, int height)
 		*nodes = node;
 		node = node->next;
 		ft_memdel((void**)nodes);
+		map = check_map(line_index, pos_index, map);
 	}
-	map.width = pos_index;
 	map.height = height;
 	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/22 13:58:28 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/28 16:07:34 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void			setup_camera(t_env *env)
 	camera.angle = M_PI / 2;
 	camera.direction.x = 0;
 	camera.direction.y = -1;
+	camera.direction = normalize_vector(camera.direction);
 	camera.projection.x = FOV;
 	camera.projection.y = 0;
 	camera.height = TEXTURE_RES / 2;

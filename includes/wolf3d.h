@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:31:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/22 16:12:54 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/28 16:07:04 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,9 +208,12 @@ typedef struct	s_env
 void			exit_usage(void);
 void			exit_error(t_env *env);
 void			exit_normally(t_env *env);
+void			exit_wrong_map(void);
 t_map			*read_map_from(char *path);
+t_map			check_map(int index, int pos_index, t_map map);
 int				is_integer_convertible(char *str);
 int				coordinates_are_convertible(char **coordinates);
+t_vector		normalize_vector(t_vector vector);
 t_env			*init_environnement(void);
 double			min_horizontal_distance(t_env *env, double angle);
 double			min_vertical_distance(t_env *env, double angle);

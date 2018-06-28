@@ -6,7 +6,7 @@
 #    By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/14 14:31:18 by jmlynarc          #+#    #+#              #
-#    Updated: 2018/06/22 15:46:19 by jmlynarc         ###   ########.fr        #
+#    Updated: 2018/06/28 16:01:09 by jmlynarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS = main.c \
 		graphic_manager.c \
 		camera.c \
 		map_init.c \
+		map_check.c\
 		tools.c \
 		pixel_drawing.c \
 		texturing.c \
@@ -52,7 +53,7 @@ DEBUG_FLAG = -fsanitize=address
 
 $(NAME): $(O_SRCS)
 	make -C $(LIBFT_REP)
-	gcc $(INCLUDE_FLAG) $(DEBUG_FLAG) $(MLX_FLAGS) $(MATH_FLAG) $(SRC) $(LIBFT) -o $(NAME)
+	gcc $(INCLUDE_FLAG) $(MLX_FLAGS) $(MATH_FLAG) $(SRC) $(LIBFT) -o $(NAME)
 
 all: $(NAME)
 
