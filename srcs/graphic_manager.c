@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:32 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/29 13:29:10 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/29 14:02:50 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static void		check_camera_position(t_env *env)
 	y_pos = (int)(env->camera.position.y);
 	if (x_pos >= env->map->width || x_pos < 0 || y_pos >= env->map->height ||
 			y_pos < 0)
-		exit_error(env);
+		exit_error(env, "Camera is out of bounds");
 	else if (env->map->map[y_pos][x_pos] == WALL)
-		exit_error(env);
+		exit_error(env, "Camera is in a wall");
 }
 
 void			redraw_scene(t_env *env)

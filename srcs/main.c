@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:39 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/22 16:20:14 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/29 14:56:19 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ int				main(int ac, char **av)
 		exit_usage();
 	env = init_environnement();
 	if (!(map = read_map_from(av[1])))
-		exit_error(env);
+		exit_error(env, "Map could not be created");
 	env->map = map;
+	if (!map_surrounded_by_walls(*(env->map)))
+		exit_error(env, "Map should be surrounded by walls");
 	redraw_scene(env);
 	set_up_hooks(env);
 	return (0);

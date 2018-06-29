@@ -6,11 +6,26 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:09:33 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/29 13:32:47 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/29 16:12:42 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+/*
+** Creates the ray with the data needed to calculate the distance between the
+** camera and the closest wall.
+** - projection_x: value between -1 and +1 that defines the vertical proportion
+** of the projection plane we're in. The vector projection is defined from the
+** center point of the screen to the point at the right of the screen. Hence
+** a -1 to 1 value.
+** - direction is set up as a variation of the camera's direction.
+** - map_position starts on the camera's position.
+** - deltas are calculated for further calculations.
+** - side_shifts are initially calculated to reach the first x/y border. Hence,
+** it is a proportion of deltas, the proportion being the distance between
+** the camera and the first line, which is between 0 and 1.
+*/
 
 static t_ray		init_ray(int column, t_env *env)
 {
@@ -40,9 +55,23 @@ static t_ray		init_ray(int column, t_env *env)
 	return (ray);
 }
 
-static t_ray		digital_differential_analysis(t_ray ray, t_env *env)
+/*
+** Starting from the first x & y axis encountered from the camera in the
+** direction calculated for the ray : algorithm to find the closest distance
+** between the camera and the first walli, either vertically or horizontally,
+** as refered by the side_shifts values.
+** - deltas being the quantity of ray.direction to apply to reach the next
+** x or y axis, side_shift (which is not a vector) tracks the proportion of
+** ray.direction that should be applied to reach the intersection between the
+** axis from the camera.
+** - x/y_direction are either +1 or -1. Are applied to move block by block in
+** the map (intersection to intersection).
+*/
+
+static t_ray		closest_distance_to_wall(t_ray ray, t_env *env)
 {
-	while (ray.surface == EMPTY)
+	while (ray.surface == EMPTY
+			&& position_is_in_bounds(ray.map_position, *(env->map)))
 	{
 		if (ray.side_shift.x < ray.side_shift.y)
 		{
@@ -66,32 +95,36 @@ static t_ray		digital_differential_analysis(t_ray ray, t_env *env)
 	return (ray);
 }
 
+/*
+** To get a correct rendering and avoid a curved wall, only the vertical or
+** hroizontal distance is being calculated (as if the wall was right in the
+** middle of the screen / parallel to the projection vector).
+** The value is then slighly corrected by dividing by the direction. It has
+** two effects :
+** - ray.direction is, for each row, a slight variation from the 
+*/
+
 static t_ray		calculate_wall_height(t_ray ray, t_env *env)
 {
 	if (ray.side == HORIZONTAL)
 		ray.wall_distance = ((double)(ray.map_position.x) -
-			env->camera.position.x + (1 - ray.x_direction) / 2) /
+			env->camera.position.x + ((ray.x_direction < 0) ? 1 : 0)) /
 			ray.direction.x;
 	else
 		ray.wall_distance = ((double)(ray.map_position.y) -
-			env->camera.position.y + (1 - ray.y_direction) / 2) /
+			env->camera.position.y + ((ray.y_direction < 0) ? 1 : 0)) /
 			ray.direction.y;
 	ray.wall_pixel_height = (int)((double)(env->win_height) /
 		ray.wall_distance);
 	return (ray);
 }
 
-/*
-** After being timed, it appears that the draw_column function is the only
-** part that gets slower when getting close of a wall.
-*/
-
 void				cast_ray(int column, t_env *env)
 {
 	t_ray		ray;
 
 	ray = init_ray(column, env);
-	ray = digital_differential_analysis(ray, env);
+	ray = closest_distance_to_wall(ray, env);
 	ray = calculate_wall_height(ray, env);
 	draw_column(column, env, ray);
 

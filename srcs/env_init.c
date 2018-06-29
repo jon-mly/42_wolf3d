@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/28 16:07:34 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/29 14:02:21 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void			setup_environnement(t_env *env)
 	env->win_width = WIN_WIDTH;
 	env->win_height = WIN_HEIGHT;
 	if (env->mlx_ptr == NULL || env->win_ptr == NULL)
-		exit_error(env);
+		exit_error(env, "MinilibX could not be launched");
 	env->timer.previous_time = clock();
 	env->timer.current_time = clock();
 	env->timer.next_frame = clock() + (CLOCKS_PER_SEC / 150);

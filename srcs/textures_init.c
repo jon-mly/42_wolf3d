@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:01:57 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 17:15:01 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/29 14:04:31 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ void				init_textures(t_env *env)
 	};
 
 	if (!(textures = (t_texture*)malloc(sizeof(t_texture) * TEXTURES_COUNT)))
-		exit_error(env);
+		exit_error(env, "Malloc on textures has failed");
 	counter = -1;
 	while (++counter < TEXTURES_COUNT)
 		textures[counter] = load_texture(files[counter], env);
 	env->textures = textures;
 	env->textures_count = TEXTURES_COUNT;
 	if (!(init_is_correct(textures, TEXTURES_COUNT)))
-		exit_error(env);
+		exit_error(env, "Textures could not be initialized correctly");
 }

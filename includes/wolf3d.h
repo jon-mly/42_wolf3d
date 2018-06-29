@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:31:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/28 16:07:04 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/29 15:57:23 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,28 @@ typedef struct	s_vector
 	double		y;
 }				t_vector;
 
+/*
+** - projection_x: value between -1 and +1 that defines the vertical proportion
+** of the projection plane we're in.
+** - direction: defines the direction of the ray. Is a variation from the
+** camera's direction.
+** - map_position: integer value of the square/unit of map we're testing
+** - deltas: proportion/quantity of direction to apply in order to shift of
+** 1 on the x or y axis.
+** - x/y_direction: either 1 or -1. Multiplier that impacts teh calculation
+** of the initial side_shifts. Depends on the sign of ray.direction.x/y.
+** - surface: the type of surface on map_position
+** - side_shift: track the shift from the camera to the last position of the
+** ray as it evolves. Allows to know if the closest wall has been hit
+** vertically or horizontally. Is a proportion of the ray's direction. Though
+** typed as a vector, it is NOT a vector.
+** - cardinal: the cardinal / axis of the wall, to retrieve the correct texture.
+** - wall_distance: value defining the distance between the camera's position
+** and the point of impact between the ray and the closest wall.
+** - wall_pixel_height: the height in pixels of the wall, used to fill the
+** correct pixels with the correct points of the texture that is applied.
+*/
+
 typedef struct	s_ray
 {
 	t_vector	direction;
@@ -142,6 +164,21 @@ typedef struct	s_ray
 	t_ray_side	side;
 	t_cardinal	cardinal;
 }				t_ray;
+
+/*
+** - position: vector defining the point where the camera is. Is the origin
+** point to calculate the value of directions & rays.
+** - direction: vector defininf the direction of the camera.
+** - projection: defines the width of the camera (field of view).
+** - angle: the angle of the camera, is linked to direction, though not used
+** directly.
+** - height: the height of the camera, set as half of the height of the walls
+** for symetry.
+** - move: track the state if the camera is moving or not.
+** - move_side: track the side of the shift.
+** - rotate: track the state if the caera is rotating or not.
+** - rotation_side: track the direction of the rotation.
+*/
 
 typedef struct	s_camera
 {
@@ -206,11 +243,12 @@ typedef struct	s_env
 */
 
 void			exit_usage(void);
-void			exit_error(t_env *env);
+void			exit_error(t_env *env, char *msg);
 void			exit_normally(t_env *env);
-void			exit_wrong_map(void);
 t_map			*read_map_from(char *path);
 t_map			check_map(int index, int pos_index, t_map map);
+int				map_surrounded_by_walls(t_map map);
+int				position_is_in_bounds(t_point point, t_map map);
 int				is_integer_convertible(char *str);
 int				coordinates_are_convertible(char **coordinates);
 t_vector		normalize_vector(t_vector vector);

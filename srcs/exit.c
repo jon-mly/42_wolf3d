@@ -6,17 +6,11 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:28 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/28 14:47:11 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/29 14:04:58 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
-void		exit_wrong_map(void)
-{
-	ft_putendl("Map invalid");
-	exit(0);
-}
 
 void		exit_usage(void)
 {
@@ -24,10 +18,12 @@ void		exit_usage(void)
 	exit(0);
 }
 
-void		exit_error(t_env *env)
+void		exit_error(t_env *env, char *msg)
 {
-	ft_putendl("An error has occured");
-	deinit_env(env);
+	ft_putstr("An error has occured : ");
+	ft_putendl(msg);
+	if (env)
+		deinit_env(env);
 	exit(0);
 }
 
