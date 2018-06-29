@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:09:33 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/14 17:18:54 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/29 13:32:47 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,11 @@ static t_ray		calculate_wall_height(t_ray ray, t_env *env)
 	return (ray);
 }
 
+/*
+** After being timed, it appears that the draw_column function is the only
+** part that gets slower when getting close of a wall.
+*/
+
 void				cast_ray(int column, t_env *env)
 {
 	t_ray		ray;
@@ -89,4 +94,5 @@ void				cast_ray(int column, t_env *env)
 	ray = digital_differential_analysis(ray, env);
 	ray = calculate_wall_height(ray, env);
 	draw_column(column, env, ray);
+
 }

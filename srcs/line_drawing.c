@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 16:58:55 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/04/17 17:17:44 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/29 13:36:38 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ void		draw_wall(int x, int y, t_env *env, t_cardinal cardinal)
 	color.a = 1;
 	fill_pixel(env, x, y, color);
 }
+
+/*
+** apply_texture_on_line is the part that gets slower when getting close of
+** a wall.
+*/
 
 void		draw_column(int index, t_env *env, t_ray ray)
 {

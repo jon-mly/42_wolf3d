@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 15:04:09 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/05/23 11:44:59 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/06/29 13:50:41 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ void				apply_texture_on_line(int line, t_env *env, t_ray ray)
 	if ((ray.side == HORIZONTAL && ray.direction.x > 0) ||
 		(ray.side == VERTICAL && ray.direction.y < 0))
 		texture_line = texture.width - texture_line - 1;
-	y = -ray.wall_pixel_height / 2 + MID_HEIGHT - 1;
-	while (++y <= ray.wall_pixel_height / 2 + MID_HEIGHT)
+	y = fmax(-ray.wall_pixel_height / 2 + MID_HEIGHT - 1, 0);
+	while (++y <= fmin(ray.wall_pixel_height / 2 + MID_HEIGHT, WIN_HEIGHT))
 	{
-		texture_y = (((y * 256 - env->win_height * 128 + ray.wall_pixel_height
-		* 128) * texture.height) / ray.wall_pixel_height) / 256;
+		texture_y = (((y * 2 - env->win_height + ray.wall_pixel_height)
+					* texture.height) / ray.wall_pixel_height) / 2;
 		fill_pixel(env, line, y, color_for_pixel(texture, texture_line,
-					texture_y));
+			texture_y));
 	}
 }
