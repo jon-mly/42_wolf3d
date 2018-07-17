@@ -6,11 +6,17 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:32 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/29 14:02:50 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/07/17 17:06:56 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+/*
+** To avoid too much operations, a minimum time between two frames is
+** calculated and checked. The value is arbitrary and may induce lag that
+** does not depend on the CPU if set too low.
+*/
 
 static int		should_redraw(t_env *env)
 {
@@ -20,7 +26,7 @@ static int		should_redraw(t_env *env)
 		return (0);
 	env->timer.frame_time = (double)(env->timer.current_time
 		- env->timer.previous_time) / (double)CLOCKS_PER_SEC;
-	env->timer.next_frame = env->timer.current_time + (CLOCKS_PER_SEC / 150);
+	env->timer.next_frame = env->timer.current_time + (CLOCKS_PER_SEC / 200);
 	return ((move_camera_if_needed(env)) || env->img_ptr == NULL);
 }
 

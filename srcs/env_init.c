@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:30:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/29 14:02:21 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/07/17 17:10:21 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ static void			setup_environnement(t_env *env)
 	env->timer.current_time = clock();
 	env->timer.next_frame = clock() + (CLOCKS_PER_SEC / 150);
 }
+
+/*
+** Arbitrary initial set up. Trying to spawn in a wall or out of bounds will
+** result in an handled error.
+*/
 
 static void			setup_camera(t_env *env)
 {

@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 14:31:14 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/29 15:57:23 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/07/17 17:10:42 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@
 ** ====== enumerations
 */
 
+/*
+** Defines the side of the wall that is exposed to the camera. Is used to
+** retrieve the texture that is to be applied.
+*/
+
 typedef enum	e_cardinal
 {
 	NORTH,
@@ -72,6 +77,14 @@ typedef enum	e_cardinal
 	WEST,
 	SOUTH
 }				t_cardinal;
+
+/*
+** As the raycasting algorithm works simultaneously by calculating on x-coord
+** and on y-coord, allows to track on which axis is the closest distance
+** from the camera to a wall. Is used to distinguish calculation cases.
+** VERTICAL = y-axis
+** HORIZONTAL = x-axis
+*/
 
 typedef enum	e_ray_side
 {

@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:09:33 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/29 16:12:42 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/07/17 17:07:30 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 ** of the projection plane we're in. The vector projection is defined from the
 ** center point of the screen to the point at the right of the screen. Hence
 ** a -1 to 1 value.
-** - direction is set up as a variation of the camera's direction.
+** - direction is set up as a variation of the camera's direction. Direction is
+** NOT a unit vector => avoid fish eye effect without further calculation.
 ** - map_position starts on the camera's position.
 ** - deltas are calculated for further calculations.
 ** - side_shifts are initially calculated to reach the first x/y border. Hence,
@@ -97,11 +98,17 @@ static t_ray		closest_distance_to_wall(t_ray ray, t_env *env)
 
 /*
 ** To get a correct rendering and avoid a curved wall, only the vertical or
-** hroizontal distance is being calculated (as if the wall was right in the
-** middle of the screen / parallel to the projection vector).
-** The value is then slighly corrected by dividing by the direction. It has
-** two effects :
-** - ray.direction is, for each row, a slight variation from the 
+** hroizontal distance is being calculated (as if the wall parallel to The
+** projection vector).
+** The value is then divided by the direction. It has two effects :
+** - the difference between map_position and camera can result in a negative
+** value that is cancelled with direction's sign.
+** - ray.direction is NOT a unit vector : longer on the sides than on the
+** center. It corrects the fish eye effect without modifying the value with
+** by a trigonometric factor.
+** Wall_distance being an arbitrary value, it is admitted that if it is equal
+** to 1, the wall will take the whole screen (dividing the height in pixel By
+** 1).
 */
 
 static t_ray		calculate_wall_height(t_ray ray, t_env *env)
@@ -111,9 +118,11 @@ static t_ray		calculate_wall_height(t_ray ray, t_env *env)
 			env->camera.position.x + ((ray.x_direction < 0) ? 1 : 0)) /
 			ray.direction.x;
 	else
+	{
 		ray.wall_distance = ((double)(ray.map_position.y) -
 			env->camera.position.y + ((ray.y_direction < 0) ? 1 : 0)) /
 			ray.direction.y;
+	}
 	ray.wall_pixel_height = (int)((double)(env->win_height) /
 		ray.wall_distance);
 	return (ray);
@@ -127,5 +136,4 @@ void				cast_ray(int column, t_env *env)
 	ray = closest_distance_to_wall(ray, env);
 	ray = calculate_wall_height(ray, env);
 	draw_column(column, env, ray);
-
 }

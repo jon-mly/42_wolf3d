@@ -6,7 +6,7 @@
 /*   By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 15:04:09 by jmlynarc          #+#    #+#             */
-/*   Updated: 2018/06/29 13:50:41 by jmlynarc         ###   ########.fr       */
+/*   Updated: 2018/07/17 17:08:39 by jmlynarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ static t_texture	wall_texture_for(t_cardinal cardinal, t_env *env)
 	else
 		return (env->textures[3]);
 }
+
+/*
+** Read a img file formatted as the images that are printed on the screen.
+*/
 
 static t_color		color_for_pixel(t_texture texture, int texture_x,
 		int texture_y)
@@ -42,6 +46,24 @@ static t_color		color_for_pixel(t_texture texture, int texture_x,
 	return (color);
 }
 
+/*
+** - texture : we get the texture that is to be applied accordingly to the
+** side of the wall that is exposed to the camera.
+** - wall_line is a value between 0 to 1 that represents the position of the
+** hit point horizontally on the wall, 0 being full left, 0.5 right in the
+** middle and 1 full right. (ray.direction gives the sign to the shift)
+** - CAUTION : on the vertical side (where the y-axis was used), it is the
+** x-axis that is used to do the calculation.
+** - texture_line : gives the line of the texture, using the previous proportion
+** applied on the width of the texture in pixels.
+** - y : to avoid lag when very close to a wall, y is limited in the range
+** [0, WIN_HEIGHT[, symetrically on both sides (hence the /2, -1 for bounds
+** reasons).
+** - texture_y : the vertical coordinate in the texture that should be applied
+** on a given pixel. texture_y is included in [0, texture.height].
+** cf. hand-written demo for proof
+*/
+
 void				apply_texture_on_line(int line, t_env *env, t_ray ray)
 {
 	t_texture		texture;
@@ -56,11 +78,11 @@ void				apply_texture_on_line(int line, t_env *env, t_ray ray)
 		: env->camera.position.y + ray.wall_distance * ray.direction.y;
 	wall_line -= floor(wall_line);
 	texture_line = (int)(wall_line * (double)(texture.width));
-	if ((ray.side == HORIZONTAL && ray.direction.x > 0) ||
+/*	if ((ray.side == HORIZONTAL && ray.direction.x > 0) ||
 		(ray.side == VERTICAL && ray.direction.y < 0))
 		texture_line = texture.width - texture_line - 1;
-	y = fmax(-ray.wall_pixel_height / 2 + MID_HEIGHT - 1, 0);
-	while (++y <= fmin(ray.wall_pixel_height / 2 + MID_HEIGHT, WIN_HEIGHT))
+*/	y = fmax(-ray.wall_pixel_height / 2 + MID_HEIGHT - 1, 0);
+	while (++y < fmin(ray.wall_pixel_height / 2 + MID_HEIGHT, WIN_HEIGHT))
 	{
 		texture_y = (((y * 2 - env->win_height + ray.wall_pixel_height)
 					* texture.height) / ray.wall_pixel_height) / 2;

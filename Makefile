@@ -6,7 +6,7 @@
 #    By: jmlynarc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/14 14:31:18 by jmlynarc          #+#    #+#              #
-#    Updated: 2018/06/29 14:54:35 by jmlynarc         ###   ########.fr        #
+#    Updated: 2018/07/17 13:08:28 by jmlynarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ MATH_FLAG = -lm
 
 DEBUG_FLAG = -fsanitize=address
 
-%.o: %.c
+%.o: %.c includes/*.h Makefile
 	@gcc $(W_FLAGS) $(INCLUDE_FLAG) -c $< -o $@
 
 $(NAME): $(O_SRCS)
